@@ -19,12 +19,11 @@ public class Assinatura {
     @JoinColumn(name = "codigo_cliente")
     private Cliente cliente;
 
+    private String status;
     private LocalDate inicioVigencia;
-
     private LocalDate fimVigencia;
 
     // Getters e Setters
-
     public Long getCodigo() {
         return codigo;
     }
@@ -47,6 +46,14 @@ public class Assinatura {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public LocalDate getInicioVigencia() {

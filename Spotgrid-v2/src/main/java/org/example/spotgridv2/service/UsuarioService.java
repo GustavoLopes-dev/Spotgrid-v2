@@ -5,20 +5,32 @@ import org.example.spotgridv2.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UsuarioService {
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Usuario buscarPorUsuario(String usuarioId) {
-        return usuarioRepository.findById(Long.valueOf(usuarioId)).orElse(null);
+    public List<Usuario> findAll() {
+        return usuarioRepository.findAll();
     }
 
-    public Usuario salvar(Usuario usuario) {
+    public Optional<Usuario> findById(Long id) {
+        return usuarioRepository.findById(id);
+    }
+
+    public Optional<Usuario> findByUsuario(String username) {
+        return usuarioRepository.findByUsuario(username);
+    }
+
+    public Usuario save(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
-    public void deletar(String usuarioId) {
-        usuarioRepository.deleteById(Long.valueOf(usuarioId));
+    public void deleteById(Long id) {
+        usuarioRepository.deleteById(id);
     }
 }

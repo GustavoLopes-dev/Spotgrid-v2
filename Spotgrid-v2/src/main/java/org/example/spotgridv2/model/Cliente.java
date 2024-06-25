@@ -3,12 +3,13 @@ package org.example.spotgridv2.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @SuppressWarnings("unused")
 @Entity
 public class Cliente {
 
-    @jakarta.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 

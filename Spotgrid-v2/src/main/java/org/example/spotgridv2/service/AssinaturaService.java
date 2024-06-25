@@ -16,44 +16,27 @@ public class AssinaturaService {
     @Autowired
     private AssinaturaRepository assinaturaRepository;
 
-    public List<Assinatura> listarTodas() {
-        return assinaturaRepository.findAll();
-    }
-
-    public Optional<Assinatura> buscarPorId(Long id) {
-        return assinaturaRepository.findById(id);
-    }
-
-    public Assinatura salvar(Assinatura assinatura) {
-        assinatura.setInicioVigencia(LocalDate.now());
-        assinatura.setFimVigencia(LocalDate.now().plusDays(7));
+    public Assinatura save(Assinatura assinatura) {
         return assinaturaRepository.save(assinatura);
     }
 
-    public void deletar(Long id) {
-        assinaturaRepository.deleteById(id);
+    public List<Assinatura> findAll() {
+        return assinaturaRepository.findAll();
     }
 
-    public List<Assinatura> listarPorCliente(Long clienteId) {
-        return assinaturaRepository.findByClienteCodigo(clienteId);
+    public Optional<Assinatura> findById(Long id) {
+        return assinaturaRepository.findById(id);
     }
 
-    public List<Assinatura> listarPorAplicativo(Long aplicativoId) {
-        return assinaturaRepository.findByAplicativoCodigo(aplicativoId);
+    public List<Assinatura> findByStatus(String status) {
+        return assinaturaRepository.findByStatus(status);
     }
 
-    public List<Assinatura> listarAtivas() {
-        return assinaturaRepository.findByFimVigenciaAfter(LocalDate.now());
+    public List<Assinatura> findByCodigoCliente(Long codigoCliente) {
+        return assinaturaRepository.findByClienteCodigo(codigoCliente);
     }
 
-    public List<Assinatura> listarCanceladas() {
-        return assinaturaRepository.findByFimVigenciaBefore(LocalDate.now());
-    }
-
-    public boolean isAssinaturaValida(Long clienteId, Long assinaturaId) {
-        Optional<Assinatura> assinatura = assinaturaRepository.findById(assinaturaId);
-        return assinatura.isPresent() &&
-                assinatura.get().getCliente().getCodigo().equals(clienteId) &&
-                assinatura.get().getFimVigencia().isAfter(LocalDate.now());
+    public List<Assinatura> findByCodigoAplicativo(Long codigoAplicativo) {
+        return assinaturaRepository.findByAplicativoCodigo(codigoAplicativo);
     }
 }

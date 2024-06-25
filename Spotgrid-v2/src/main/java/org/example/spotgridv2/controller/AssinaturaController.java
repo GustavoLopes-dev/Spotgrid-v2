@@ -3,70 +3,38 @@ package org.example.spotgridv2.controller;
 import org.example.spotgridv2.model.Assinatura;
 import org.example.spotgridv2.service.AssinaturaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-
 
 @RestController
-@RequestMapping("/assinaturas")
+@RequestMapping("/servcad/assinaturas")
 public class AssinaturaController {
 
     @Autowired
     private AssinaturaService assinaturaService;
 
-    @GetMapping
-    public List<Assinatura> listarTodas() {
-        return assinaturaService.listarTodas();
+    @PostMapping
+    public Assinatura createAssinatura(@RequestBody Assinatura assinatura) {
+        return assinaturaService.save(assinatura);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Assinatura> buscarPorId(@PathVariable Long id) {
-        Optional<Assinatura> assinatura = assinaturaService.buscarPorId(id);
-        if (assinatura.isPresent()) {
-            return ResponseEntity.ok(assinatura.get());
+    @GetMapping("/{tipo}")
+    public List<Assinatura> getAssinaturasByTipo(@PathVariable String tipo) {
+        if (tipo.equals("TODAS")) {
+            return assinaturaService.findAll();
         } else {
-            return ResponseEntity.notFound().build();
+            return assinaturaService.findByStatus(tipo);
         }
     }
 
-    @PostMapping
-    public Assinatura criarAssinatura(@RequestBody Assinatura assinatura) {
-        return assinaturaService.salvar(assinatura);
+    @GetMapping("/asscli/{codcli}")
+    public List<Assinatura> getAssinaturasByCliente(@PathVariable Long codcli) {
+        return assinaturaService.findByCodigoCliente(codcli);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarAssinatura(@PathVariable Long id) {
-        assinaturaService.deletar(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/cliente/{clienteId}")
-    public List<Assinatura> listarPorCliente(@PathVariable Long clienteId) {
-        return assinaturaService.listarPorCliente(clienteId);
-    }
-
-    @GetMapping("/aplicativo/{aplicativoId}")
-    public List<Assinatura> listarPorAplicativo(@PathVariable Long aplicativoId) {
-        return assinaturaService.listarPorAplicativo(aplicativoId);
-    }
-
-    @GetMapping("/validas")
-    public List<Assinatura> listarAtivas() {
-        return assinaturaService.listarAtivas();
-    }
-
-    @GetMapping("/canceladas")
-    public List<Assinatura> listarCanceladas() {
-        return assinaturaService.listarCanceladas();
-    }
-
-    @GetMapping("/valida")
-    public ResponseEntity<Boolean> isAssinaturaValida(
-            @RequestParam Long clienteId, @RequestParam Long assinaturaId) {
-        boolean valida = assinaturaService.isAssinaturaValida(clienteId, assinaturaId);
-        return ResponseEntity.ok(valida);
+    @GetMapping("/assapp/{codapp}")
+    public List<Assinatura> getAssinaturasByAplicativo(@PathVariable Long codapp) {
+        return assinaturaService.findByCodigoAplicativo(codapp);
     }
 }

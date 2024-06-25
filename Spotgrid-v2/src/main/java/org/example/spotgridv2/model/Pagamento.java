@@ -4,18 +4,18 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @SuppressWarnings("unused")
+@Entity
 public class Pagamento {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
     @ManyToOne
-    @JoinColumn(name = "codigo_assinatura")
     private Assinatura assinatura;
 
     private double valorPago;
     private String promocao;
-
     private LocalDate dataPagamento;
 
     // Getters e Setters
@@ -44,19 +44,19 @@ public class Pagamento {
         this.valorPago = valorPago;
     }
 
-    public LocalDate getDataPagamento() {
-        return dataPagamento;
-    }
-
-    public void setDataPagamento(LocalDate dataPagamento) {
-        this.dataPagamento = dataPagamento;
-    }
-
     public String getPromocao() {
         return promocao;
     }
 
     public void setPromocao(String promocao) {
         this.promocao = promocao;
+    }
+
+    public LocalDate getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(LocalDate dataPagamento) {
+        this.dataPagamento = dataPagamento;
     }
 }

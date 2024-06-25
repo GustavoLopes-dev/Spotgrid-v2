@@ -3,18 +3,20 @@ package org.example.spotgridv2.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @SuppressWarnings("unused")
 @Entity
 public class Aplicativo {
 
-    @jakarta.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
     private String nome;
     private double custoMensal;
 
+    // Getters e Setters
     public Long getCodigo() {
         return codigo;
     }

@@ -15,29 +15,26 @@ public class AplicativoService {
     @Autowired
     private AplicativoRepository aplicativoRepository;
 
-    public List<Aplicativo> listarTodos() {
+    public List<Aplicativo> findAll() {
         return aplicativoRepository.findAll();
     }
 
-    public Optional<Aplicativo> buscarPorId(Long id) {
-        return aplicativoRepository.findById(id);
-    }
-
-    public Aplicativo salvar(Aplicativo aplicativo) {
+    public Aplicativo save(Aplicativo aplicativo) {
         return aplicativoRepository.save(aplicativo);
     }
 
-    public void deletar(Long id) {
-        aplicativoRepository.deleteById(id);
+    public Optional<Aplicativo> findById(Long id) {
+        return aplicativoRepository.findById(id);
     }
 
-    public Aplicativo atualizarCusto(Long id, double novoCusto) {
-        Optional<Aplicativo> aplicativo = aplicativoRepository.findById(id);
-        if (aplicativo.isPresent()) {
-            Aplicativo app = aplicativo.get();
-            app.setCustoMensal(novoCusto);
-            return aplicativoRepository.save(app);
+    // Método para atualizar o custo mensal de um aplicativo
+    public Optional<Aplicativo> updateCusto(Long id, double novoCustoMensal) {
+        Optional<Aplicativo> optionalAplicativo = aplicativoRepository.findById(id);
+        if (optionalAplicativo.isPresent()) {
+            Aplicativo aplicativo = optionalAplicativo.get();
+            aplicativo.setCustoMensal(novoCustoMensal);
+            return Optional.of(aplicativoRepository.save(aplicativo));
         }
-        return null;
+        return Optional.empty();
     }
 }

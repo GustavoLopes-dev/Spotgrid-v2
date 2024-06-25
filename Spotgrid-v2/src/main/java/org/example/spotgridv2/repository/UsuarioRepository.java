@@ -1,13 +1,14 @@
-package org.example.spotgridv2.repository;
+    package org.example.spotgridv2.repository;
 
 
-import org.example.spotgridv2.model.Usuario;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+    import org.example.spotgridv2.model.Usuario;
+    import org.springframework.data.jpa.repository.JpaRepository;
+    import org.springframework.stereotype.Repository;
 
-@SuppressWarnings("unused")
-@Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+    import java.util.Optional;
 
-    Usuario findByUsuario(String usuario);
-}
+    @SuppressWarnings("unused")
+    @Repository
+    public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+        Optional<Usuario> findByUsuario(String usuario);
+    }

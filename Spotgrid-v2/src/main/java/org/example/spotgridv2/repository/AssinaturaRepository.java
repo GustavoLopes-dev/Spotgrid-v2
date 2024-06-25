@@ -11,8 +11,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface AssinaturaRepository extends JpaRepository<Assinatura, Long> {
-    List<Assinatura> findByClienteCodigo(Long clienteId);
-    List<Assinatura> findByAplicativoCodigo(Long aplicativoId);
-    List<Assinatura> findByFimVigenciaAfter(LocalDate date);
-    List<Assinatura> findByFimVigenciaBefore(LocalDate date);
+    List<Assinatura> findByClienteCodigo(Long codigoCliente);
+    List<Assinatura> findByAplicativoCodigo(Long codigoAplicativo);
+    List<Assinatura> findByStatus(String status);
 }

@@ -13,19 +13,7 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public List<Cliente> listarTodos() {
+    public List<Cliente> findAll() {
         return clienteRepository.findAll();
-    }
-
-    public Optional<Cliente> buscarPorId(Long id) {
-        return clienteRepository.findById(id);
-    }
-
-    public Cliente salvar(Cliente cliente) {
-        return clienteRepository.save(cliente);
-    }
-
-    public void deletar(Long id) {
-        clienteRepository.deleteById(id);
     }
 }
