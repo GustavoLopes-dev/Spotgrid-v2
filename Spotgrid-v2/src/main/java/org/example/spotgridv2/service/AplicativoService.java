@@ -16,7 +16,7 @@ public class AplicativoService {
     private AplicativoRepository aplicativoRepository;
 
     public List<Aplicativo> findAll() {
-        return aplicativoRepository.findAll();
+        return (List<Aplicativo>) aplicativoRepository.findAll();
     }
 
     public Aplicativo save(Aplicativo aplicativo) {
@@ -27,7 +27,6 @@ public class AplicativoService {
         return aplicativoRepository.findById(id);
     }
 
-    // Método para atualizar o custo mensal de um aplicativo
     public Optional<Aplicativo> updateCusto(Long id, double novoCustoMensal) {
         Optional<Aplicativo> optionalAplicativo = aplicativoRepository.findById(id);
         if (optionalAplicativo.isPresent()) {

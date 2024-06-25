@@ -21,7 +21,7 @@ public class AssinaturaController {
 
     @GetMapping("/{tipo}")
     public List<Assinatura> getAssinaturasByTipo(@PathVariable String tipo) {
-        if (tipo.equals("TODAS")) {
+        if ("TODAS".equals(tipo.toUpperCase())) {
             return assinaturaService.findAll();
         } else {
             return assinaturaService.findByStatus(tipo);

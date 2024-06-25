@@ -16,7 +16,6 @@ public class Aplicativo {
     private String nome;
     private double custoMensal;
 
-    // Getters e Setters
     public Long getCodigo() {
         return codigo;
     }

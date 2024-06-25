@@ -21,7 +21,7 @@ public class AssinaturaService {
     }
 
     public List<Assinatura> findAll() {
-        return assinaturaRepository.findAll();
+        return (List<Assinatura>) assinaturaRepository.findAll();
     }
 
     public Optional<Assinatura> findById(Long id) {

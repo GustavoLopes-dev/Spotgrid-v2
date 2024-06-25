@@ -10,10 +10,11 @@ import java.util.Optional;
 
 @Service
 public class ClienteService {
+
     @Autowired
     private ClienteRepository clienteRepository;
 
     public List<Cliente> findAll() {
-        return clienteRepository.findAll();
+        return (List<Cliente>) clienteRepository.findAll();
     }
 }
